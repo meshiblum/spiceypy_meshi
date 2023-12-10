@@ -12,6 +12,14 @@ RUN apt-get update -y && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Download and install the SPICE Toolkit
+RUN wget https://naif.jpl.nasa.gov/pub/naif/toolkit/C/PC_Linux_GCC_64bit/packages/cspice.tar.Z && \
+    tar -xvf cspice.tar.Z && \
+    cd cspice && \
+    make all && \
+    make install && \
+    cd ..
+
 # Install SpiceyPy using pip
 RUN pip3 install spiceypy
 
